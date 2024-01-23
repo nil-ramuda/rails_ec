@@ -14,12 +14,9 @@ development:
 test:
   <<: *default
   database: myapp_test
-
+#
 production:
   <<: *default
-  database: <%= ENV['MYAPP_DATABASE'] %>
-  username: <%= ENV['MYAPP_DATABASE_USERNAME'] %>
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
-  host: <%= ENV['MYAPP_DATABASE_HOST'] %>
-  port: 5432
-  # url: <%= ENV['MYAPP_DATABASE_URL'] %>
+  database: myapp_production
+  username: myapp
+  password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
