@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 item1 = Item.new(
   name: 'イチゴショートケーキ',
   price: 150,
