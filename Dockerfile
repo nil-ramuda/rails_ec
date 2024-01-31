@@ -24,6 +24,9 @@ COPY Gemfile.lock /myapp/Gemfile.lock
 
 RUN bundle install
 
+RUN ["apt-get", "update"]
+RUN ["apt-get", "install", "-y", "vim"]
+
 COPY package.json yarn.lock ./
 RUN yarn install
 

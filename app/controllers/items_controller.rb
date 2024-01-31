@@ -7,5 +7,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find_by(id: params[:id])
+    @latest_item = Item.last
   end
 end
