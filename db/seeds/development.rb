@@ -47,7 +47,6 @@ item5.save
 item6 = Item.new(
   name: 'ブルーベリータルト',
   price: 130,
-  image_name: 'blueberry-torte.jpg',
   detail: 'リッチなコクのあるタルト台にブルーベリーをたっぷり飾り、ブルーベリーソースで仕上げました。'
 )
 item6.image.attach(io: File.open(Rails.root.join('app/assets/images/items/blueberry-torte.jpg')),
