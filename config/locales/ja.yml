@@ -1,0 +1,26 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        item:
+          attributes:
+            name:
+              blank: '商品名は必須です'
+            price:
+              not_a_number: '商品価格は半角数字で入力してください'
+              blank: '商品価格は必須です'
+              less_than_or_equal_to: '商品価格は1000円以下で入力してください'
+            detail:
+              blank: '商品詳細は必須です'
+    models:
+      item: '商品'
+    attributes:
+      item:
+        name: '商品名'
+        price: '商品価格'
+        detail: '商品詳細'
+        image: '商品画像'
+  helpers:
+    submit:
+      create: '出品する'
+      update: '更新する'
