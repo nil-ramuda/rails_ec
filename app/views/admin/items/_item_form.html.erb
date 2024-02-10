@@ -1,0 +1,16 @@
+<%= form_with model: [:admin, @item], local: true do |form| %>
+  <% @item.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+  <div class="form_group pt-4 pb-3">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+    <%= form.label :price %>
+    <%= form.text_field :price, class: "form-control" %>
+    <%= form.label :detail %>
+    <%= form.text_area :detail, class: "form-control" %>
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,26 @@
+<h2>商品管理</h2>
+<div class="table-responsive">
+  <table class="table table-striped table-sm" >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>名称</th>
+        <th>価格</th>
+        <th>説明</th>
+        <th>画像</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.id %></td>
+          <td><%= item.name %></td>
+          <td><%= item.price %></td>
+          <td><%= item.detail.truncate(20) %></td>
+          <td><%= link_to '編集', edit_admin_item_path(item) %></td>
+          <td><%= link_to '削除', [:admin, item], data: { 'turbo-method': :delete, turbo_confirm: 'この商品を削除しますか？' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
