@@ -5,13 +5,13 @@ ja:
         item:
           attributes:
             name:
-              blank: '商品名は必須です'
+              blank: 'は必須です'
             price:
-              not_a_number: '商品価格は半角数字で入力してください'
-              blank: '商品価格は必須です'
-              less_than_or_equal_to: '商品価格は1000円以下で入力してください'
+              blank: 'は必須です'
+              not_a_number: 'は半角数字で入力してください'
+              less_than_or_equal_to: 'は1000円以下で入力してください'
             detail:
-              blank: '商品詳細は必須です'
+              blank: 'は必須です'
     models:
       item: '商品'
     attributes:
