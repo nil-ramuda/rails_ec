@@ -1,6 +1,6 @@
 <%= form_with model: [:admin, @item], local: true do |form| %>
   <% @item.errors.full_messages.each do |message| %>
-    <%= message %>
+    <p><%= message %></p>
   <% end %>
   <div class="form_group pt-4 pb-3">
     <%= form.label :name %>
