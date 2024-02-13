@@ -18,9 +18,13 @@
       </ul>
       <form class="d-flex">
         <button class="btn btn-outline-dark" type="submit">
-          <i class="bi-cart-fill me-1"></i>
-          カート
-          <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+          <% if params[:controller] == 'admin/items' && %w(index new edit).include?(params[:action]) %>
+            <%= link_to '商品登録', new_admin_item_path %>
+          <% else %>
+            <i class="bi-cart-fill me-1"></i>
+            カート
+            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+          <% end %>
         </button>
       </form>
     </div>
