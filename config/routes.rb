@@ -8,4 +8,10 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :items
   end
+
+  resources :carts
+
+  resources :cart_items do
+    resources :carts, only: [:create, :destroy]
+  end
 end

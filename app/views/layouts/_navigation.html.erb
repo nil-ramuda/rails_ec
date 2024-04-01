@@ -15,6 +15,11 @@
             <li><a class="dropdown-item" href="#!">新着</a></li>
           </ul>
         </li>
+        <% if session[:cart_id] %>
+          <li class="nav-item"><a class="nav-link" href="#!"><%= session[:cart_id] %></a></li>
+        <% else %>
+          <li class="nav-item"><a class="nav-link" href="#!">カートに何も入ってません</a></li>
+        <% end %>
       </ul>
       <form class="d-flex">
         <button class="btn btn-outline-dark" type="submit">
