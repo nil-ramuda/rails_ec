@@ -9,21 +9,17 @@
           <span><%= "#{@item.price}円" %></span>
         </div>
         <p class="lead"><%= @item.detail %></p>
-        <div class="d-flex">
-          <%#<input class="form-control text-center me-3" id="inputQuantity" type="num" value="2" style="max-width: 3rem" />%>
           <%= form_with url: cart_items_path(item_id: @item.id), local: true do |form| %>
-            <%#= form.label :quantity %>
-            <%= form.number_field :quantity, class: "form-control", style: "max-width: 3rem" %>
-            <i class="bi-cart-fill me-1"></i>
-            <%= form.submit 'カートに入れる', class: "btn btn-outline-dark flex-shrink-0", type: "button" %>
-          <% end %>
-          <%# <input class="form-control text-center me-3" id="inputQuantity" type="num" name="quantity" style="max-width: 3rem"> %>
-          <%# <button class="btn btn-outline-dark flex-shrink-0" type="button"> %>
-            <%# <i class="bi-cart-fill me-1"></i> %>
-            <%#カートに入れる %>
-            <%# <div class="text-center"><%= button_to 'カートに入れる', { controller: 'cart_items', action: 'create' }, { params: { item_id: @item.id }, class: "btn btn-outline-dark mt-auto" } %></div>
-          <%# </button> %>
+        <div class="d-flex">
+            <%= form.number_field :quantity, class: "form-control", style: "max-width: 4rem" %>
+            <%= button_tag class: "btn btn-outline-dark flex-shrink-0", type: "submit" do %>
+              <i class="bi-cart-fill me-1"></i>
+              カートに入れる
+              <%#= form.submit 'カートに入れる', class: "btn btn-outline-dark flex-shrink-0" %>
+              <%#= form.submit 'カートに入れる' %>
+            <% end %>
         </div>
+          <% end %>
       </div>
     </div>
   </div>
