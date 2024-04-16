@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CartItemsController < ApplicationController
   before_action :set_cart
 
@@ -6,7 +8,6 @@ class CartItemsController < ApplicationController
     @cart_items.to_a.map! do |cart_item|
       @total_price += cart_item.quantity * Item.find(cart_item.item_id).price
     end
-
   end
 
   def create
@@ -29,18 +30,19 @@ class CartItemsController < ApplicationController
   end
 
   private
-    def set_cart
-      @total_price = 0
-      unless Cart.find_by(id: session[:cart_id])
-        @cart = Cart.new
-        @cart.save
-        session[:cart_id] = @cart.id
-      else
-        @cart = Cart.find_by(id: session[:cart_id])
-      end
-    end
 
-    def cart_item_params
-      params.permit(:quantity, :item_id)
+  def set_cart
+    @total_price = 0
+    if Cart.find_by(id: session[:cart_id])
+      @cart = Cart.find_by(id: session[:cart_id])
+    else
+      @cart = Cart.new
+      @cart.save
+      session[:cart_id] = @cart.id
     end
+  end
+
+  def cart_item_params
+    params.permit(:quantity, :item_id)
+  end
 end
