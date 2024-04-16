@@ -17,11 +17,15 @@ class CartItemsController < ApplicationController
     else
       @cart_item = @cart.cart_items.create(cart_item_params)
     end
+    flash[:notice] = "カートに#{@cart_item.item.name}を#{params[:quantity].to_i}個追加しました"
+    redirect_to action: params[:action], controller: params[:controller]
   end
 
   def destroy
     @cart_item = CartItem.find_by(item_id: params[:item_id], cart_id: session[:cart_id])
     @cart_item.destroy
+    flash[:notice] = "カートから#{@cart_item.item.name}を削除しました"
+    redirect_to checkout_index_path
   end
 
   private

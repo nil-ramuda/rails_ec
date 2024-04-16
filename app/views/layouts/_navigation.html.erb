@@ -15,6 +15,7 @@
             <li><a class="dropdown-item" href="#!">新着</a></li>
           </ul>
         </li>
+        <li class="nav-item"><a class="nav-link" href="#!"><%= session[:cart_id] %></a></li>
       </ul>
       <form class="d-flex">
         <button class="btn btn-outline-dark" type="submit">
@@ -22,7 +23,7 @@
             <%= link_to '商品登録', new_admin_item_path, class: "text-decoration-none" %>
           <% else %>
             <i class="bi-cart-fill me-1"></i>
-            <%= link_to 'カート', checkout_index_path, class: "text-decoration-none" %>
+            <%= link_to 'カート', checkout_index_path, class: "text-decoration-none link-dark" %>
             <span class="badge bg-dark text-white ms-1 rounded-pill"><%= @total_quantity %></span>
 
           <% end %>
