@@ -11,12 +11,10 @@
         <p class="lead"><%= @item.detail %></p>
         <%= form_with url: cart_items_path(item_id: @item.id), local: true do |form| %>
           <div class="d-flex">
-            <%= form.number_field :quantity, class: "form-control", style: "max-width: 4rem" %>
+            <%= form.number_field :quantity, min: 1, max: 99, value: 1, class: "form-control", style: "max-width: 4rem" %>
             <%= button_tag class: "btn btn-outline-dark flex-shrink-0", type: "submit" do %>
               <i class="bi-cart-fill me-1"></i>
               カートに入れる
-              <%#= form.submit 'カートに入れる', class: "btn btn-outline-dark flex-shrink-0" %>
-              <%#= form.submit 'カートに入れる' %>
             <% end %>
           </div>
         <% end %>
