@@ -10,5 +10,8 @@ Rails.application.routes.draw do
   end
 
   resources :cart_items, only: %i[create destroy]
-  resources :checkout, controller: 'cart_items', only: :index
+  resources :items, only: :update do
+    resources :cart_items, only: %i[create update]
+  end
+  resources :checkout, controller: :cart_items, only: :index
 end
