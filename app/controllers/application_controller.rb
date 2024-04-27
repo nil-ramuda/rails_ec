@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   private
 
   def count_total
-    # @cart
     @total_quantity = CartItem.where(cart_id: session[:cart_id]).sum(:quantity)
   end
 end
