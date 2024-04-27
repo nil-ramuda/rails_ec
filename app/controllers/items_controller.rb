@@ -20,7 +20,11 @@ class ItemsController < ApplicationController
   private
 
   def pick_items
-    @cart ||= Cart.find_by(id: session[:cart_id])
+    @cart = Cart.find_by(id: session[:cart_id])
+    if @cart.nil?
+      @cart = Cart.create
+      session[:cart_id] = @cart.id
+    end
     @item_ids = @cart.cart_items.pluck(:item_id)
   end
 end
