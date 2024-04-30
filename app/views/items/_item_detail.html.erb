@@ -9,13 +9,13 @@
           <span><%= "#{@item.price}円" %></span>
         </div>
         <p class="lead"><%= @item.detail %></p>
-        <div class="d-flex">
-          <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-          <button class="btn btn-outline-dark flex-shrink-0" type="button">
+        <%= form_with model: [@item, @cart_item], local: true do |form| %>
+          <div class="d-flex">
+            <%= form.number_field :quantity, min: 1, max: 99, value: 1, class: "form-control", style: "max-width: 4rem" %>
+            <%= form.submit 'カートに入れる', class: "btn btn-outline-dark flex-shrink-0" %>
             <i class="bi-cart-fill me-1"></i>
-            カートに入れる
-          </button>
-        </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
