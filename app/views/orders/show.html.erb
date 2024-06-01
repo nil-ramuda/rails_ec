@@ -1,35 +1,35 @@
 <h2>購入明細一覧</h2>
 <div class="table-responsive">
-    <p>注文番号 : <%= @order.id %></p>
-    <p>姓 : <%= @order.last_name %></p>
-    <p>名 : <%= @order.first_name %></p>
-    <p>ユーザー名 : <%= @order.user_name %></p>
-    <p>メールアドレス : <%= @order.email %></p>
-    <p>住所(番地) :  <%= @order.required_address %></p>
-    <p>住所(建物名等) : <%= @order.optional_address %></p>
-    <p>国 : <%= @order.country %></p>
-    <p>都道府県 : <%= @order.prefecture %></p>
-    <p>郵便番号 : <%= @order.zip_code %></p>
-    <p>クレジットカード番号 : <%= @order.credit_card_number %></p>
-    <p>CVV : <%= @order.cvv %></p>
-    <p>注文日時 : <%= @order.created_at %></p>
-    <table class="table table-striped table-sm" >
-        <thead>
+  <p>注文番号 : <%= @order.id %></p>
+  <p>姓 : <%= @order.last_name %></p>
+  <p>名 : <%= @order.first_name %></p>
+  <p>ユーザー名 : <%= @order.user_name %></p>
+  <p>メールアドレス : <%= @order.email %></p>
+  <p>住所(番地) :  <%= @order.required_address %></p>
+  <p>住所(建物名等) : <%= @order.optional_address %></p>
+  <p>国 : <%= @order.country %></p>
+  <p>都道府県 : <%= @order.prefecture %></p>
+  <p>郵便番号 : <%= @order.zip_code %></p>
+  <p>クレジットカード番号 : <%= @order.credit_card_number %></p>
+  <p>CVV : <%= @order.cvv %></p>
+  <p>注文日時 : <%= @order.created_at %></p>
+  <table class="table table-striped table-sm" >
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>商品価格</th>
+        <th>購入数</th>
+      </tr>
+    </thead>
+    <% @order.order_items.each do |order_item| %>
+      <tbody>
         <tr>
-            <th>商品名</th>
-            <th>商品価格</th>
-            <th>購入数</th>
+          <td><%= order_item.name %></td>
+          <td><%= order_item.price %></td>
+          <td><%= order_item.quantity %></td>
         </tr>
-        </thead>
-        <% @order.order_items.each do |order_item| %>
-        <tbody>
-            <tr>
-                <td><%= order_item.name %></td>
-                <td><%= order_item.price %></td>
-                <td><%= order_item.quantity %></td>
-            </tr>
         <tbody>
         <% end %>
-    </table>
-    合計<%= @order.total_price %>円
-</div>
+      </table>
+      合計<%= @order.total_price %>円
+    </div>

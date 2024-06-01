@@ -176,7 +176,7 @@
         <div class="col-md-7 col-lg-8">
           <h4 class="mb-3">請求先</h4>
           <%#= form_with model: Order.new, url: checkout_path , local: true do |form| %>
-          <%= form_with model: @order, url: checkout_path , local: true do |form| %>
+            <%= form_with model: @order, url: checkout_path , local: true do |form| %>
               <%= render partial: 'shared/error_messages', locals: { object: form.object } %>
               <div class="row g-3">
                 <div class="col-sm-6">
@@ -200,19 +200,16 @@
                   <%= form.text_field :email, class: "form-control", maxlength: 255, placeholder: "you@example.com" %>
                 </div>
                 <div class="col-md-5">
-
                   <%= form.label :country, '国', class: "form-label" %>
                   <%#= form.select 'order[country]', ['日本'], class: "form-select", id: "country" %>
                   <%= form.select :country, ['日本'], class: "form-select", id: "country" %>
                 </div>
                 <div class="col-md-4">
-
                   <%= form.label :prefecture, '県', class: "form-label" %>
                   <%#= form.select 'order[prefecture]', ['東京'], class: "form-select", id: "prefecture" %>
                   <%= form.select :prefecture, ['東京'], class: "form-select", id: "prefecture" %>
                 </div>
                 <div class="col-md-3">
-
                   <%= form.label :zip_code, class: "form-label" %>
                   <%#= form.text_field 'order[zip_code]', class: "form-control", id: "zip" %>
                   <%= form.text_field :zip_code, class: "form-control", maxlength: 8, id: "zip" %>
@@ -223,7 +220,6 @@
                   <%= form.text_field :required_address, class: "form-control", maxlength: 30, placeholder: "〇〇市1丁目1番" %>
                 </div>
                 <div class="col-12">
-
                   <%= form.label :optional_address, '住所(建物名等)' %>
                   <%#= form.text_field 'order[optional_address]', class: "form-control", placeholder: "〇〇マンション1F 1号室" %>
                   <%= form.text_field :optional_address, class: "form-control", maxlength: 30, placeholder: "〇〇マンション1F 1号室" %>
@@ -255,8 +251,8 @@
               <hr class="my-4">
               <% session[:total_price] = @total_price %>
               <%= form.submit "購入する", class: "w-100 btn btn-primary btn-lg" %>
-          <% end %>
+            <% end %>
+          </div>
         </div>
-      </div>
-    </main>
-  </div>
+      </main>
+    </div>
