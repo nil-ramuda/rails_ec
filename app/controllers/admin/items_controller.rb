@@ -3,6 +3,7 @@
 module Admin
   class ItemsController < ApplicationController
     before_action :basic_authenticate
+    skip_before_action :set_cart, :count_total
 
     def index
       @items = Item.all
@@ -44,12 +45,6 @@ module Admin
     end
 
     private
-
-    def basic_authenticate
-      authenticate_or_request_with_http_basic do |user_name, password|
-        user_name == ENV['ADMIN_USER_NAME'] && password == ENV['ADMIN_PASSWORD']
-      end
-    end
 
     def item_params
       params.require(:item).permit(:name, :price, :detail, :image)

@@ -1,11 +1,31 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  before_action :count_total
+  before_action :set_cart, :count_total
+
 
   private
 
+  def set_cart
+    @total_price = 0
+    @cart = Cart.find_by(id: session[:cart_id])
+    if @cart.nil?
+      @cart = Cart.create
+      session[:cart_id] = @cart.id
+    end
+  end
+
   def count_total
-    @total_quantity = CartItem.where(cart_id: session[:cart_id]).sum(:quantity)
+    @total_quantity = @cart.cart_items.sum(:quantity)
+    @cart_items = @cart.cart_items
+    @cart_items.to_a.map! do |cart_item|
+      @total_price += cart_item.quantity * cart_item.item.price
+    end
+  end
+
+  def basic_authenticate
+    authenticate_or_request_with_http_basic do |user_name, password|
+      user_name == ENV['ADMIN_USER_NAME'] && password == ENV['ADMIN_PASSWORD']
+    end
   end
 end
