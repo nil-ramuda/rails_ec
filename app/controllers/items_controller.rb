@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
   end
 
   private
-  # メソッド名適切か？
+
   def pick_items
     @item_ids = @cart.cart_items.pluck(:item_id)
   end

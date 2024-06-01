@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class CartItemsController < ApplicationController
-
   def new
     @order = Order.new
   end

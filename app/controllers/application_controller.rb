@@ -3,16 +3,15 @@
 class ApplicationController < ActionController::Base
   before_action :set_cart, :count_total
 
-
   private
 
   def set_cart
     @total_price = 0
     @cart = Cart.find_by(id: session[:cart_id])
-    if @cart.nil?
-      @cart = Cart.create
-      session[:cart_id] = @cart.id
-    end
+    return unless @cart.nil?
+
+    @cart = Cart.create
+    session[:cart_id] = @cart.id
   end
 
   def count_total
