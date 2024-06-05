@@ -5,20 +5,26 @@ class OrdersController < ApplicationController
   before_action :basic_authenticate, only: %i[index show]
 
   def create
-    @order = Order.new(order_params)
-    if @order.save
-      orders = @cart_items.map do |cart_item|
-        { order_id: @order.id, name: cart_item.item.name, price: cart_item.item.price,
-          quantity: cart_item.quantity }
+    ActiveRecord::Base.transaction do
+      @order = Order.new(order_params)
+      if @order.save!
+        orders = @cart_items.map do |cart_item|
+          order_item_params = { order_id: @order.id, name: cart_item.item.name, price: cart_item.item.price,
+            quantity: cart_item.quantity }
+          raise 'OrderItem is invalid' if OrderItem.new(order_item_params).invalid?
+          order_item_params
+        end
+        OrderItem.insert_all(orders)
+        OrderItemMailer.with(order: @order).order_item_mail.deliver_now
+        @cart.destroy
+        redirect_to root_path
+        flash[:notice] = 'ご購入ありがとうございます。明細をメールアドレスにお送りしました'
+      else
+        render 'cart_items/index', status: :unprocessable_entity
       end
-      OrderItem.insert_all(orders)
-      OrderItemMailer.with(order: @order).order_item_mail.deliver_now
-      @cart.destroy
-      redirect_to root_path
-      flash[:notice] = 'ご購入ありがとうございます。明細をメールアドレスにお送りしました'
-    else
-      render 'cart_items/index', status: :unprocessable_entity
     end
+    rescue => e
+      p e.message
   end
 
   def index
