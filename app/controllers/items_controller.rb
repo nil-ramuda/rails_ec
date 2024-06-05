@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  before_action :pick_items
+  before_action :item_ids
 
   def new
     @cart_item = @cart.cart_items.new
@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
 
   private
 
-  def pick_items
+  def item_ids
     @item_ids = @cart.cart_items.pluck(:item_id)
   end
 end

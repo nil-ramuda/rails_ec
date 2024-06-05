@@ -1,17 +1,5 @@
 ja:
   activerecord:
-    errors:
-      models:
-        item:
-          attributes:
-            # name:
-            #   blank: 'は必須です'
-            price:
-              # blank: 'は必須です'
-              not_a_number: 'は半角数字で入力してください。'
-              less_than_or_equal_to: 'は1000円以下で入力してください。'
-            # detail:
-            #   blank: 'は必須です'
     models:
       item: '商品'
     attributes:
