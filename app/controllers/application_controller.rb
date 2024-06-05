@@ -17,9 +17,7 @@ class ApplicationController < ActionController::Base
   def count_total
     @total_quantity = @cart.cart_items.sum(:quantity)
     @cart_items = @cart.cart_items
-    @cart_items.to_a.map! do |cart_item|
-      @total_price += cart_item.quantity * cart_item.item.price
-    end
+    @total_price = @cart_items.to_a.sum { |cart_item|  cart_item.quantity * cart_item.item.price }
   end
 
   def basic_authenticate
