@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class CartItemsController < ApplicationController
-  before_action :set_cart
+  def new
+    @order = Order.new
+  end
 
+  # def index; end
   def index
-    @cart_items = @cart.cart_items
-    @cart_items.to_a.map! do |cart_item|
-      @total_price += cart_item.quantity * cart_item.item.price
-    end
+    @order = Order.new
   end
 
   def create
@@ -32,15 +32,6 @@ class CartItemsController < ApplicationController
   end
 
   private
-
-  def set_cart
-    @total_price = 0
-    @cart = Cart.find_by(id: session[:cart_id])
-    if @cart.nil?
-      @cart = Cart.create
-      session[:cart_id] = @cart.id
-    end
-  end
 
   def cart_item_params
     params.require(:cart_item).permit(:quantity).merge(item_id: params[:item_id])

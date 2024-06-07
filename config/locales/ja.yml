@@ -1,17 +1,5 @@
 ja:
   activerecord:
-    errors:
-      models:
-        item:
-          attributes:
-            name:
-              blank: 'は必須です'
-            price:
-              blank: 'は必須です'
-              not_a_number: 'は半角数字で入力してください'
-              less_than_or_equal_to: 'は1000円以下で入力してください'
-            detail:
-              blank: 'は必須です'
     models:
       item: '商品'
     attributes:
@@ -20,7 +8,22 @@ ja:
         price: '商品価格'
         detail: '商品詳細'
         image: '商品画像'
+      order:
+        last_name: '姓'
+        first_name: '名'
+        user_name: 'ユーザー名'
+        email: 'メールアドレス'
+        required_address: '住所(番地)'
+        optional_address: '住所(建物名等)'
+        country: '国'
+        prefecture: '都道府県'
+        zip_code: '郵便番号'
+        credit_card_number: 'クレジットカード番号'
+        cvv: 'CVV'
   helpers:
     submit:
       create: '出品する'
       update: '更新する'
+  errors:
+    messages:
+      blank: 'は必須項目です。入力してください。'

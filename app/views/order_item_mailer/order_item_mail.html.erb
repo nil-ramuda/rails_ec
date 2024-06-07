@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <%= "#{@order.last_name}様、ご購入ありがとうございます。" %>
+    <p>購入明細をご覧ください</p>
+    <% @order.order_items.each do |order_item| %>
+      <p>
+        <%= "#{order_item.name}(定価#{order_item.price}円)" %>
+        <%= "#{order_item.quantity}個" %>
+      </p>
+    <% end %>
+    <p><%= "#{@order.total_price}円" %></p>
+    <p>またのご利用をお待ちしております</p>
+  </body>
+</html>
