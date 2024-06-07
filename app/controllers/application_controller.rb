@@ -8,8 +8,7 @@ class ApplicationController < ActionController::Base
   def set_cart
     @total_price = 0
     @cart = Cart.find_by(id: session[:cart_id])
-    return unless @cart.nil?
-
+    return if @cart.present?
     @cart = Cart.create
     session[:cart_id] = @cart.id
   end
