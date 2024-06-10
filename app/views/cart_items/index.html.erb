@@ -155,11 +155,11 @@
             <li class="list-group-item d-flex justify-content-between bg-body-tertiary align-items-center">
               <div class="text-success">
                 <h6 class="my-0">プロモーションコード</h6>
-                <% if @promotion_code %>
+                <% if @promotion_code.present? %>
                   <small><%= @promotion_code.code %></small>
                 <% end %>
               </div>
-                <% if @promotion_code %>
+                <% if @promotion_code.present? %>
                   <span class="text-success"><%= "#{-@promotion_code.discount}円" %></span>
                 <% end %>
             </li>
@@ -170,7 +170,7 @@
               <strong><%= @total_price %>円</strong>
             </li>
           </ul>
-          <% unless @promotion_code %>
+          <% unless @promotion_code.present? %>
             <form class="card p-2">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="プロモーションコード" name="code">

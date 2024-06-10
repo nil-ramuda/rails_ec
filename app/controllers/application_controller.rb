@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     return unless session[:code]
 
     @promotion_code = PromotionCode.find_by(code: session[:code])
-    return if @promotion_code
+    return if @promotion_code.present?
 
     session[:code] = nil
     flash.now[:alert] = 'プロモーションコードが正しくありません'
