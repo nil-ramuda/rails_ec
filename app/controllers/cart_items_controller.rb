@@ -38,5 +38,4 @@ class CartItemsController < ApplicationController
   def cart_item_params
     params.require(:cart_item).permit(:quantity).merge(item_id: params[:item_id])
   end
-
 end

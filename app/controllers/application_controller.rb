@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
     @total_price = 0
     @cart = Cart.find_by(id: session[:cart_id])
     return if @cart.present?
+
     @cart = Cart.create
     session[:cart_id] = @cart.id
   end
@@ -24,13 +25,14 @@ class ApplicationController < ActionController::Base
   def code_exists
     session[:code] ||= params[:code]
     return unless session[:code]
+
     @promotion_code = PromotionCode.find_by(code: session[:code])
-    unless @promotion_code
-      session[:code] = nil
-      flash.now[:alert] = 'プロモーションコードが正しくありません'
-      @order = Order.new
-      render 'cart_items/index', status: :unprocessable_entity
-    end
+    return if @promotion_code
+
+    session[:code] = nil
+    flash.now[:alert] = 'プロモーションコードが正しくありません'
+    @order = Order.new
+    render 'cart_items/index', status: :unprocessable_entity
   end
 
   def redeem

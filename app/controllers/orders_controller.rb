@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
         order_item_params = { order_id: @order.id, name: cart_item.item.name, price: cart_item.item.price,
                               quantity: cart_item.quantity }
         raise 'OrderItem is invalid' if OrderItem.new(order_item_params).invalid?
+
         order_item_params
       end
       OrderItem.insert_all(orders)

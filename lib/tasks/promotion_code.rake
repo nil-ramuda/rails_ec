@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'securerandom'
 
 namespace :promotion_code do
   desc 'Generate promotion codes'
-  task :generate => :environment do
+  task generate: :environment do
     10.times do
       ApplicationRecord.transaction do
         PromotionCode.create!(code: SecureRandom.alphanumeric(7), discount: Random.rand(100..1000))

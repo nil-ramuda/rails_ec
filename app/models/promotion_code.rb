@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PromotionCode < ApplicationRecord
   with_options presence: true do
     validates :code, length: { maximum: 7, message: 'は7桁で作成してください' },
