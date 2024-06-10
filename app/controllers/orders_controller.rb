@@ -3,6 +3,8 @@
 class OrdersController < ApplicationController
   before_action :set_cart, :count_total
   before_action :basic_authenticate, only: %i[index show]
+  before_action :code_exists
+  before_action :redeem, if: proc { @promotion_code.present? }
 
   def create
     ActiveRecord::Base.transaction do
@@ -17,6 +19,10 @@ class OrdersController < ApplicationController
       OrderItem.insert_all(orders)
       OrderItemMailer.with(order: @order).order_item_mail.deliver_now
       @cart.destroy
+      if @promotion_code.present?
+        @promotion_code.destroy
+        session[:code] = nil
+      end
       redirect_to root_path
       flash[:notice] = 'ご購入ありがとうございます。明細をメールアドレスにお送りしました'
     end

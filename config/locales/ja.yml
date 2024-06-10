@@ -20,6 +20,9 @@ ja:
         zip_code: '郵便番号'
         credit_card_number: 'クレジットカード番号'
         cvv: 'CVV'
+      promotion_code:
+        code: 'プロモーションコード'
+        discount: '割引額'
   helpers:
     submit:
       create: '出品する'

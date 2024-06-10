@@ -2,6 +2,8 @@
 
 class ApplicationController < ActionController::Base
   before_action :set_cart, :count_total
+  before_action :code_exists
+  before_action :redeem, if: proc { @promotion_code.present? }
 
   private
 
@@ -16,7 +18,23 @@ class ApplicationController < ActionController::Base
   def count_total
     @total_quantity = @cart.cart_items.sum(:quantity)
     @cart_items = @cart.cart_items
-    @total_price = @cart_items.to_a.sum { |cart_item|  cart_item.quantity * cart_item.item.price }
+    @total_price = @cart_items.to_a.sum { |cart_item| cart_item.quantity * cart_item.item.price }
+  end
+
+  def code_exists
+    session[:code] ||= params[:code]
+    return unless session[:code]
+    @promotion_code = PromotionCode.find_by(code: session[:code])
+    unless @promotion_code
+      session[:code] = nil
+      flash.now[:alert] = 'プロモーションコードが正しくありません'
+      @order = Order.new
+      render 'cart_items/index', status: :unprocessable_entity
+    end
+  end
+
+  def redeem
+    @total_price > @promotion_code.discount ? @total_price -= @promotion_code.discount : @total_price = 0
   end
 
   def basic_authenticate
