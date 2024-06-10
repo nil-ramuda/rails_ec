@@ -159,9 +159,9 @@
                   <small><%= @promotion_code.code %></small>
                 <% end %>
               </div>
-                <% if @promotion_code.present? %>
-                  <span class="text-success"><%= "#{-@promotion_code.discount}円" %></span>
-                <% end %>
+              <% if @promotion_code.present? %>
+                <span class="text-success"><%= "#{-@promotion_code.discount}円" %></span>
+              <% end %>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <div class="list-inline">
