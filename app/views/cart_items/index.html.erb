@@ -155,9 +155,13 @@
             <li class="list-group-item d-flex justify-content-between bg-body-tertiary align-items-center">
               <div class="text-success">
                 <h6 class="my-0">プロモーションコード</h6>
-                <small>サンプルコード</small>
+                <% if @promotion_code.present? %>
+                  <small><%= @promotion_code.code %></small>
+                <% end %>
               </div>
-              <span class="text-success">0</span>
+              <% if @promotion_code.present? %>
+                <span class="text-success"><%= "#{-@promotion_code.discount}円" %></span>
+              <% end %>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <div class="list-inline">
@@ -166,16 +170,18 @@
               <strong><%= @total_price %>円</strong>
             </li>
           </ul>
-          <form class="card p-2">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code">
-              <button type="submit" class="btn btn-secondary">Redeem</button>
-            </div>
-          </form>
+          <% unless @promotion_code.present? %>
+            <form class="card p-2">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="プロモーションコード" name="code">
+                <button type="submit" class="btn btn-secondary">適用する</button>
+              </div>
+            </form>
+          <% end %>
         </div>
         <div class="col-md-7 col-lg-8">
           <h4 class="mb-3">請求先</h4>
-          <%= form_with model: @order, url: checkout_path , local: true do |form| %>
+          <%= form_with model: @order, url: checkout_path, local: true do |form| %>
             <%= render partial: 'shared/error_messages', locals: { object: form.object } %>
             <div class="row g-3">
               <div class="col-sm-6">
@@ -237,7 +243,6 @@
               </div>
             </div>
             <hr class="my-4">
-            <% session[:total_price] = @total_price %>
             <%= form.submit "購入する", class: "w-100 btn btn-primary btn-lg" %>
           <% end %>
         </div>

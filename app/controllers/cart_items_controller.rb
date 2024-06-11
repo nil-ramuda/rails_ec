@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class CartItemsController < ApplicationController
+  before_action :code_exists
+  before_action :redeem, if: proc { @promotion_code.present? }
+
   def new
     @order = Order.new
   end
 
-  # def index; end
   def index
     @order = Order.new
   end
