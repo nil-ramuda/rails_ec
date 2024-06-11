@@ -24,8 +24,8 @@ class ApplicationController < ActionController::Base
 
   def code_exists
     session[:code] ||= params[:code]
-    return unless session[:code]
-
+    return if session[:code].blank?
+    
     @promotion_code = PromotionCode.find_by(code: session[:code])
     return if @promotion_code.present?
 
